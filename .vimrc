@@ -9,6 +9,7 @@ let g:lightline = {
       \ },
       \ }
 let g:rainbow_active = 1
+set mouse=a
 set clipboard=unnamedplus
 set encoding=utf-8
 " disable vi compatibility (emulation of old bugs)
@@ -57,6 +58,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'frazrepo/vim-rainbow'
 Plugin 'preservim/nerdcommenter'
+Plugin 'fatih/vim-go'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
