@@ -1,21 +1,22 @@
 #! /bin/sh
-gap=10
-PANEL_HEIGHT=25
+gap=8
+PANEL_HEIGHT=27
 export gap
 export PANEL_HEIGHT
 
 #This creates negative padding equal to window gap so that gaps are shown only between windows and not on desktop edges.
 bspc config window_gap $gap;
-bspc config top_padding $(($PANEL_HEIGHT+$gap))
-bspc config left_padding $gap
-bspc config right_padding $gap
-bspc config bottom_padding $gap
+#bspc config top_padding $(($PANEL_HEIGHT+$gap))
+#bspc config top_padding $PANEL_HEIGHT
+#bspc config left_padding $gap
+#bspc config right_padding $gap
+#bspc config bottom_padding $gap
 
 #Various settings
-bspc config gapless_monocle     false #Default setup uses negative padding, and gapless monocle looks really weird like that
-bspc config borderless_monocle  true
+bspc config gapless_monocle true #Default setup uses negative padding, and gapless monocle looks really weird like that
+bspc config borderless_monocle true
 bspc config single_monocle false
-bspc config paddingless_monocle false
+bspc config paddingless_monocle true
 #bspc config ignore_ewmh_focus      true
 #bspc config initial_polarity second_child
 bspc config remove_disabled_monitors true
@@ -46,54 +47,54 @@ bspc monitor -d I II III IV V
 ###This creates and names desktops for multiple monitors.
 #workspaces_multimonitor &
 
-bspc rule -a screenkey --unmanage
-bspc rule -a gcolor2 state=floating center=true
-bspc rule -a lxappearance state=floating center=true
-bspc rule -a gmrun state=floating center=true
-bspc rule -a lxterminal state=floating center=true sticky=true
+#bspc rule -a screenkey --unmanage
+#bspc rule -a gcolor2 state=floating center=true
+bspc rule -a Lxappearance state=floating center=true
+#bspc rule -a gmrun state=floating center=true
+#bspc rule -a lxterminal state=floating center=true sticky=true
 #bspc rule -a urxvt state=floating center=true
-bspc rule -a viewnior state=floating center=true
-bspc rule -a file-roller state=floating center=true
-bspc rule -a floaterm state=floating center=true
-bspc rule -a spotify state=pseudo_tiled
+#bspc rule -a viewnior state=floating center=true
+#bspc rule -a file-roller state=floating center=true
+#bspc rule -a floaterm state=floating center=true
+#bspc rule -a spotify state=pseudo_tiled
 #bspc rule -a nautilus state=pseudo_tiled
 #bspc rule -a skype state=pseudo_tiled
-bspc rule -a file-roller state=pseudo_tiled
-bspc rule -a transmission-gtk state=pseudo_tiled
-bspc rule -a conky sticky=on manage=off lower=on
-bspc rule -a astime sticky=on
-bspc rule -a yad state=floating
-bspc rule -a Docky layer=above border=off manage=on
-bspc rule -a Plank layer=above border=off manage=on
-bspc rule -a wbar layer=above
-bspc rule -a dockbarx layer=above
-bspc rule -a google-chrome-unstable private=on
-bspc rule -a google-chrome-stable private=on
-bspc rule -a chromium private=on
-bspc rule -a firefox private=on
-bspc rule -a midori private=on
-bspc rule -a gnome-pie border=off manage=off
-bspc rule -a wpa_gui state=pseudo_tiled
-bspc rule -a libreoffice state=tiled
-bspc rule -a '*:libreofficedev' state=tiled
-bspc rule -a '*:soffice' state=tiled
-bspc rule -a Thunderbird desktop=^5
-bspc rule -a TelegramDesktop desktop=^3
-bspc rule -a Signal desktop=^3
+#bspc rule -a file-roller state=pseudo_tiled
+#bspc rule -a transmission-gtk state=pseudo_tiled
+#bspc rule -a conky sticky=on manage=off lower=on
+#bspc rule -a astime sticky=on
+#bspc rule -a yad state=floating
+#bspc rule -a Docky layer=above border=off manage=on
+#bspc rule -a Plank layer=above border=off manage=on
+#bspc rule -a wbar layer=above
+#bspc rule -a dockbarx layer=above
+#bspc rule -a google-chrome-unstable private=on
+#bspc rule -a google-chrome-stable private=on
+#bspc rule -a chromium private=on
+#bspc rule -a midori private=on
+#bspc rule -a gnome-pie border=off manage=off
+#bspc rule -a wpa_gui state=pseudo_tiled
+#bspc rule -a libreoffice state=tiled
+#bspc rule -a '*:libreofficedev' state=tiled
+#bspc rule -a '*:soffice' state=tiled
+bspc rule -a Thunderbird desktop=^5 
+bspc rule -a TelegramDesktop desktop=^3 focus=on follow=on
+bspc rule -a Signal desktop=^3 
 bspc rule -a Gimp-2.10 state=floating desktop=^4
+bspc rule -a firefox desktop='^1' follow=off 
 #bspc rule -a calibre desktop=II
 #bspc rule -a geany desktop=II
 #bspc rule -a deluge desktop=III
-bspc rule -a 9menu border=off manage=off
-bspc rule -a tint2 border=off manage=off
+#bspc rule -a 9menu border=off manage=off
+#bspc rule -a tint2 border=off manage=off
 #bspc desktop I --layout monocle
 #bspc desktop II --layout monocle
 
-setxkbmap -option grp:alt_shift_toggle us,ua &
+setxkbmap -option grp:alt_shift_toggle us,ua,fr &
 
 
-pkill thunderbird
-thunderbird &
+#pkill thunderbird
+#thunderbird &
 
 ##  Autogap adjusts windowgap automatically according to the number of
 ##  windows on the desktop. Using it disables negative window gap.
@@ -101,7 +102,8 @@ autogap &
 
 ##  This script balances all windows when new one is spawned 
 #euclid_balancer &
-
+pkill udiskie
+udiskie --tray &
 ##Edge-switcher switches to next workspace when moves moves to the 
 ##edge of the monitor (behavior similar to enlightenment)
 #edge-switcher &
@@ -111,8 +113,11 @@ bspc config external_rules_command /usr/bin/pseudo_automatic_mode
 ##Adjust new window: splits biggest windows to keep windows about the same size
 #bspc config external_rules_command /usr/bin/adjust-new-window
 
+pkill i3lock-wait-for-suspend
+i3lock-wait-for-suspend &
+
 ##Autostart apps
-feh --bg-scale ~/Pictures/arch_wall.png
+feh --bg-scale ~/Pictures/arch_wall_v2.png
 #Keybindings daemon
 killall sxhkd
 sxhkd &
@@ -120,7 +125,6 @@ killall xcape
 xcape -e 'Super_L=Alt_L|F1'
 ## load dunst
 killall dunst
-pkill dunst
 dunst &
 
 # clipboard manager
@@ -128,10 +132,8 @@ pkill clipit
 clipit &
 
 killall polybar
-pkill polybar  
 polybar v1 &
 
-pkill picom
 killall picom
 picom --config ~/.config/picom/picom.conf &
 

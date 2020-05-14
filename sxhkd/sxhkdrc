@@ -3,12 +3,13 @@
 
 #edit sxhkdrc
 alt + F2
-	kitty -e vim ~/.config/sxhkd/sxhkdrc
+	kitty -e nvim ~/.config/sxhkd/sxhkdrc
 
 #edit bspwmrc
 alt + F3
-	kitty -e vim ~/.config/bspwm/bspwmrc
+	kitty -e nvim ~/.config/bspwm/bspwmrc
 
+#rofi
 alt + F1
 	rofi -show drun -kb-cancel Alt+F1,Escape -font "San Francisco 13" -show-icons
 
@@ -93,8 +94,8 @@ super + ctrl + c
 # alt + shift + {a,s,w,d}
 
 # Move current window to largest space or preselected area if there is one.
-#super + Return
-#    windowpromoter
+super + Tab
+    windowpromoter
 
 # Create a new "master area", splitting the whole desktop instead of just windows.
 alt + Return
@@ -103,7 +104,9 @@ alt + Return
 # go (Shift=move) to desktop (and focus the monitor that the desktop is located on. Bspwm style)
 super + {_,shift + }{1-9,0}
     bspc {desktop -f,node -d} ^{1-9,10}
-
+# Next/Previous desktop
+super {Next,Prior}
+	bspc desktop -f {next,prev}
 ## Alternative: i3 style behavior (focus nth, desktop of the focused monitor)
 #super + {1-9,0}
 #	focusdesktopofthismonitor {1-9}
@@ -280,8 +283,9 @@ super + e
 
 # Use slightly bigger font for ranger
 super + shift + e
-	tilix ranger
+	kitty ranger
 
+# Screenshot
 Print
 	scrot
 Print + alt
@@ -297,6 +301,12 @@ XF86AudioRaiseVolume
 
 XF86AudioLowerVolume
 	pactl set-sink-volume 0 -5%
+
+ctrl + F3
+	pactl set-sink-volume 1 +5%
+
+ctrl + F2
+	pactl set-sink-volume 1 -5%
 
 XF86AudioMute
 	pactl set-sink-mute 0 toggle 
@@ -323,10 +333,11 @@ alt + ctrl + space
 	$GUI_EDITOR ~/.config/sxhkd/sxhkdrc
 # Toggle compositing
 super + ctrl + space
-	{pkill compton ,\
-	compton -b }
+	{pkill picom ,\
+	picom -b }
 
 # Remove receptacles
 super + BackSpace
   for i in $(bspc query -N -n .leaf.!window.local); do bspc node $i -k; done
 
+# Change keyboard layout to fr/us

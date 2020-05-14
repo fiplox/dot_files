@@ -147,6 +147,10 @@
     # Paths to default icons.
     icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
+[play_sound]
+    summary = "*"
+    script = ~/bin/alert.sh
+
 [frame]
     width = 5
     color = "#666876"
