@@ -159,8 +159,8 @@ super + shift + {Left,Down,Up,Right}
 super + ctrl + {a,s,w,d}
 	bspwm_resize.sh {west,south,north,east}
 
-#super + ctrl + {h,j,k,l}
-#	bspwm_resize.sh {west,south,north,east}
+super + ctrl + {h,j,k,l}
+	bspwm_resize.sh {west,south,north,east}
 	
 super + ctrl + {Left,Down,Up,Right}
 	bspwm_resize.sh {west,south,north,east}

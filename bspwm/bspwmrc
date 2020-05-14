@@ -40,61 +40,23 @@ bspc config split_ratio         0.52
 
 #bspc monitor -d i ii iii iv v vi vii viii ix x
 #bspc monitor -d One Two Three Four Five Six Seven Eight Nine Ten
-bspc monitor -d I II III IV V
+bspc monitor -d I II III IV V VI VII VIII IX
 #bspc monitor -d • • • • • • • • • •
 #bspc monitor -d I II III IV V VI
 
 ###This creates and names desktops for multiple monitors.
 #workspaces_multimonitor &
 
-#bspc rule -a screenkey --unmanage
-#bspc rule -a gcolor2 state=floating center=true
 bspc rule -a Lxappearance state=floating center=true
-#bspc rule -a gmrun state=floating center=true
-#bspc rule -a lxterminal state=floating center=true sticky=true
-#bspc rule -a urxvt state=floating center=true
-#bspc rule -a viewnior state=floating center=true
-#bspc rule -a file-roller state=floating center=true
-#bspc rule -a floaterm state=floating center=true
-#bspc rule -a spotify state=pseudo_tiled
-#bspc rule -a nautilus state=pseudo_tiled
-#bspc rule -a skype state=pseudo_tiled
-#bspc rule -a file-roller state=pseudo_tiled
-#bspc rule -a transmission-gtk state=pseudo_tiled
-#bspc rule -a conky sticky=on manage=off lower=on
-#bspc rule -a astime sticky=on
-#bspc rule -a yad state=floating
-#bspc rule -a Docky layer=above border=off manage=on
-#bspc rule -a Plank layer=above border=off manage=on
-#bspc rule -a wbar layer=above
-#bspc rule -a dockbarx layer=above
-#bspc rule -a google-chrome-unstable private=on
-#bspc rule -a google-chrome-stable private=on
-#bspc rule -a chromium private=on
-#bspc rule -a midori private=on
-#bspc rule -a gnome-pie border=off manage=off
-#bspc rule -a wpa_gui state=pseudo_tiled
-#bspc rule -a libreoffice state=tiled
+bspc rule -a libreoffice state=tiled
 #bspc rule -a '*:libreofficedev' state=tiled
-#bspc rule -a '*:soffice' state=tiled
-bspc rule -a Thunderbird desktop=^5 
-bspc rule -a TelegramDesktop desktop=^3 focus=on follow=on
-bspc rule -a Signal desktop=^3 
-bspc rule -a Gimp-2.10 state=floating desktop=^4
+bspc rule -a Thunderbird desktop=^9 
+bspc rule -a TelegramDesktop desktop=^4 focus=on follow=on
+bspc rule -a Signal desktop=^4 
+bspc rule -a Gimp-2.10 state=floating desktop=^3
 bspc rule -a firefox desktop='^1' follow=off 
-#bspc rule -a calibre desktop=II
-#bspc rule -a geany desktop=II
-#bspc rule -a deluge desktop=III
-#bspc rule -a 9menu border=off manage=off
-#bspc rule -a tint2 border=off manage=off
-#bspc desktop I --layout monocle
-#bspc desktop II --layout monocle
 
 setxkbmap -option grp:alt_shift_toggle us,ua,fr &
-
-
-#pkill thunderbird
-#thunderbird &
 
 ##  Autogap adjusts windowgap automatically according to the number of
 ##  windows on the desktop. Using it disables negative window gap.
@@ -102,8 +64,6 @@ autogap &
 
 ##  This script balances all windows when new one is spawned 
 #euclid_balancer &
-pkill udiskie
-udiskie --tray &
 ##Edge-switcher switches to next workspace when moves moves to the 
 ##edge of the monitor (behavior similar to enlightenment)
 #edge-switcher &
@@ -113,29 +73,37 @@ bspc config external_rules_command /usr/bin/pseudo_automatic_mode
 ##Adjust new window: splits biggest windows to keep windows about the same size
 #bspc config external_rules_command /usr/bin/adjust-new-window
 
-pkill i3lock-wait-for-suspend
-i3lock-wait-for-suspend &
+killall thunderbird
+killall i3lock-wait-for-suspend
+killall sxhkd
+killall xcape
+killall dunst
+killall clipit
+killall polybar
+killall picom
+killall udiskie
 
 ##Autostart apps
+# load thunderbird 
+thunderbird &
+# i3lock daemon 
+i3lock-wait-for-suspend &
+# Set wallpaper
 feh --bg-scale ~/Pictures/arch_wall_v2.png
 #Keybindings daemon
-killall sxhkd
 sxhkd &
-killall xcape
+# Set super = to alt + F1 for drun (dmenu)
 xcape -e 'Super_L=Alt_L|F1'
-## load dunst
-killall dunst
+# load dunst (notification manager)
 dunst &
-
 # clipboard manager
-pkill clipit
 clipit &
-
-killall polybar
+# load status bar/panel
 polybar v1 &
-
-killall picom
-picom --config ~/.config/picom/picom.conf &
+# load compositor
+picom -b 
+# load auto mount
+udiskie --tray &
 
 #Source autostartfile. Uncomment this if you use bspwm-git
 #. $HOME/.config/bspwm/autostart

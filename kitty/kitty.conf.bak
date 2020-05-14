@@ -6,7 +6,7 @@
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
-font_family      Terminess Powerline
+font_family      Noto Mono
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
@@ -35,8 +35,8 @@ force_ltr no
 #: "WORLD HELLO", and if you try to select a substring of an RTL-
 #: shaped string, you will get the character that would be there had
 #: the the string been LTR. For example, assuming the Hebrew word
-#: ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¨ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ, selecting the character that on the screen appears to be ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ
-#: actually writes into the selection buffer the character ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ.
+#: ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¨ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ, selecting the character that on the screen appears to be ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ
+#: actually writes into the selection buffer the character ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ.
 
 #: kitty's default behavior is useful in conjunction with a filter to
 #: reverse the word order, however, if you wish to manipulate RTL
@@ -89,7 +89,7 @@ font_features none
 #: is useful as some fonts might have features worthwhile in a
 #: terminal. For example, Fira Code Retina includes a discretionary
 #: feature, zero, which in that font changes the appearance of the
-#: zero (0), to make it more easily distinguishable from ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ. Fira Code
+#: zero (0), to make it more easily distinguishable from ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ. Fira Code
 #: Retina also includes other discretionary features known as
 #: Stylistic Sets which have the tags ss01 through ss20.
 
@@ -254,7 +254,7 @@ url_prefixes http https file ftp
 #: The set of URL prefixes to look for when detecting a URL under the
 #: mouse cursor.
 
-copy_on_select no
+copy_on_select yes
 
 #: Copy to clipboard or a private buffer on select. With this set to
 #: clipboard, simply selecting text with the mouse will cause the text
@@ -298,7 +298,7 @@ click_interval -1.0
 #: clicks (in seconds). Negative numbers will use the system default
 #: instead, if available, or fallback to 0.5.
 
-focus_follows_mouse no
+focus_follows_mouse yes
 
 #: Set the active window to the window under the mouse when moving the
 #: mouse around
@@ -373,8 +373,8 @@ command_on_bell none
 #: Window layout {{{
 
 remember_window_size  no
-initial_window_width  640
-initial_window_height 400
+initial_window_width  800
+initial_window_height 500
 
 #: If enabled, the window size will be remembered so that new
 #: instances of kitty will have the same size as the previous
@@ -528,7 +528,7 @@ tab_fade 0.25 0.5 0.75 1
 #: can change the number of cells used by adding/removing entries to
 #: this list.
 
-tab_separator " ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
+tab_separator " ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
 
 #: The separator between tabs in the tab bar when using separator as
 #: the tab_bar_style.
@@ -563,8 +563,8 @@ tab_bar_background none
 
 #: Color scheme {{{
 
-foreground #dddddd
-background #000000
+foreground #b9b9b9
+background #212324
 
 #: The foreground and background colors
 
@@ -620,12 +620,12 @@ dim_opacity 0.75
 #: How much to dim text that has the DIM/FAINT attribute set. One
 #: means no dimming and zero means fully dimmed (i.e. invisible).
 
-selection_foreground #000000
+selection_foreground #212324
 
 #: The foreground for text selected with the mouse. A value of none
 #: means to leave the color unchanged.
 
-selection_background #fffacd
+selection_background #2f3333
 
 #: The background for text selected with the mouse.
 
@@ -634,7 +634,7 @@ selection_background #fffacd
 #: dull and bright version. You can also set the remaining colors from
 #: the 256 color table as color16 to color255.
 
-color0 #000000
+color0 #27353d
 color8 #767676
 
 #: black
@@ -644,33 +644,33 @@ color9 #f2201f
 
 #: red
 
-color2  #19cb00
-color10 #23fd00
+color2  #68c156
+color10 #76b768
 
 #: green
 
 color3  #cecb00
-color11 #fffd00
+color11 #ff9712
 
 #: yellow
 
-color4  #0d73cc
-color12 #1a8fff
+color4  #1c98e8
+color12 #387bd2
 
 #: blue
 
-color5  #cb1ed1
+color5  #8e69c8
 color13 #fd28ff
 
 #: magenta
 
-color6  #0dcdcd
-color14 #14ffff
+color6  #1c98e8
+color14 #3d96e2
 
 #: cyan
 
-color7  #dddddd
-color15 #ffffff
+color7  #b9b9b9
+color15 #b9b9b9
 
 #: white
 
@@ -702,7 +702,7 @@ mark3_background #f274bc
 
 #: Advanced {{{
 
-shell .
+shell fish
 
 #: The shell program to execute. The default value of . means to use
 #: whatever shell is set as the default shell for the current user.
