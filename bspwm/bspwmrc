@@ -6,6 +6,7 @@ export PANEL_HEIGHT
 
 #This creates negative padding equal to window gap so that gaps are shown only between windows and not on desktop edges.
 bspc config window_gap $gap;
+#bspc config border_radius 5
 #bspc config top_padding $(($PANEL_HEIGHT+$gap))
 #bspc config top_padding $PANEL_HEIGHT
 #bspc config left_padding $gap
@@ -16,31 +17,37 @@ bspc config window_gap $gap;
 bspc config gapless_monocle true #Default setup uses negative padding, and gapless monocle looks really weird like that
 bspc config borderless_monocle true
 bspc config single_monocle false
-bspc config paddingless_monocle true
-#bspc config ignore_ewmh_focus      true
+#bspc config paddingless_monocle true
+#bspc config automatic_scheme longest_side
 #bspc config initial_polarity second_child
+#bspc rule -a '*:*' split_dir=west
 bspc config remove_disabled_monitors true
 bspc config remove_unplugged_monitors true
 ## Honor size hints: do not make windows smaller than they wish to be
 #bspc config honor_size_hints true 
-
+# Do not follow window on opening
+bspc config ignore_ewmh_focus true
 ##Color settings
-bspc config focused_border_color "#81A1C1"
+bspc config focused_border_color "#81A1F1"
 bspc config normal_border_color "#4C566A"
 #"#000000"
 bspc config presel_feedback_color "#1ABB9B"
 #"#8F3724"
-bspc config border_width 1
+bspc config border_width 2
 
 bspc config focus_follows_pointer true
 #bspc config pointer_follows_focus true #Some keybindings automatically enable and disable this setting
+
+bspc config automatic_scheme longest_side
+bspc config initial_polarity second_child
 
 #Settings for manual splitting
 bspc config split_ratio         0.52
 
 #bspc monitor -d i ii iii iv v vi vii viii ix x
 #bspc monitor -d One Two Three Four Five Six Seven Eight Nine Ten
-bspc monitor -d I II III IV V VI VII VIII IX
+#bspc monitor -d I II III IV V VI VII VIII IX
+bspc monitor -d 1 2 3 4 5 6 #7 8 9
 #bspc monitor -d • • • • • • • • • •
 #bspc monitor -d I II III IV V VI
 
@@ -50,17 +57,20 @@ bspc monitor -d I II III IV V VI VII VIII IX
 bspc rule -a Lxappearance state=floating center=true
 bspc rule -a libreoffice state=tiled
 #bspc rule -a '*:libreofficedev' state=tiled
-bspc rule -a Thunderbird desktop=^9 
-bspc rule -a TelegramDesktop desktop=^4 focus=on follow=on
+bspc rule -a Thunderbird desktop=^6 
+bspc rule -a TelegramDesktop desktop=^4 
 bspc rule -a Signal desktop=^4 
 bspc rule -a Gimp-2.10 state=floating desktop=^3
 bspc rule -a firefox desktop='^1' follow=off 
+bspc rule -a feh state=floating
+bspc desktop 9 --layout monocle
+bspc rule -a Qalculate-gtk state=floating
 
-setxkbmap -option grp:alt_shift_toggle us,ua,fr &
+setxkbmap -option grp:alt_shift_toggle us,fr,ua &
 
 ##  Autogap adjusts windowgap automatically according to the number of
 ##  windows on the desktop. Using it disables negative window gap.
-autogap &
+#autogap &
 
 ##  This script balances all windows when new one is spawned 
 #euclid_balancer &
@@ -69,41 +79,99 @@ autogap &
 #edge-switcher &
 ###External rules
 ##Pseudo automatic mode: always splits focused window when opening new window
-bspc config external_rules_command /usr/bin/pseudo_automatic_mode
+#bspc config external_rules_command /usr/bin/pseudo_automatic_mode
 ##Adjust new window: splits biggest windows to keep windows about the same size
 #bspc config external_rules_command /usr/bin/adjust-new-window
 
-killall thunderbird
-killall i3lock-wait-for-suspend
-killall sxhkd
-killall xcape
-killall dunst
-killall clipit
 killall polybar
-killall picom
-killall udiskie
 
 ##Autostart apps
-# load thunderbird 
-thunderbird &
+ac=`cat /sys/class/power_supply/AC/online`
+case $ac in 
+0)
+	if !(pgrep -x thunderbird) > /dev/null
+	then
+		thunderbird &
+	fi
+	;;
+1)	
+	if !(pgrep -x signal-desktop) > /dev/null
+	then
+		signal-desktop &
+	fi
+	if !(pgrep -x thunderbird) > /dev/null
+	then
+		thunderbird &
+	fi
+	if !(pgrep -x telegram-desktop) > /dev/null
+	then
+		telegram-desktop &
+	fi
+	;;
+esac
 # i3lock daemon 
-i3lock-wait-for-suspend &
+if !(pgrep -x i3lock-wait-for-suspend) > /dev/null
+then
+	i3lock-wait-for-suspend &
+fi
+
+if !(pgrep -x mpd) > /dev/null
+then
+	mpd
+fi
+
 # Set wallpaper
-feh --bg-scale ~/Pictures/arch_wall_v2.png
+#feh --bg-scale ~/Pictures/arch_wall_v2.png
+feh --bg-scale ~/Pictures/wallpapers/0031.jpg
+
 #Keybindings daemon
-sxhkd &
+if !(pgrep -x sxhkd) > /dev/null
+then
+	sxhkd &
+fi
+
 # Set super = to alt + F1 for drun (dmenu)
-xcape -e 'Super_L=Alt_L|F1'
+if !(pgrep -x xcape) > /dev/null
+then
+	xcape -e 'Super_L=Alt_L|F1'
+fi
 # load dunst (notification manager)
-dunst &
+if !(pgrep -x dunst) > /dev/null
+then
+	dunst &
+fi
 # clipboard manager
-clipit &
+if !(pgrep -x clipit) > /dev/null
+then
+	clipit &
+fi
 # load status bar/panel
 polybar v1 &
 # load compositor
-picom -b 
+#picom -b 
 # load auto mount
-udiskie --tray &
+if !(pgrep -x udiskie) > /dev/null
+then
+	udiskie --tray &
+fi
+
+# Set default pointer (not the cross)
+xsetroot -cursor_name left_ptr
+# Disable BEEP
+#xset b off 
+setxkbmap -option caps:swapescape
+
+pidof bspswallow || bspswallow &
+
+# Disable bluetooth 
+bt=$(rfkill list | awk 'FNR==2{print $3}')
+if [ $bt = "no" ];
+then
+	echo "OK"
+	sudo rfkill block 0
+else
+	echo "NOT OK"
+fi
 
 #Source autostartfile. Uncomment this if you use bspwm-git
 #. $HOME/.config/bspwm/autostart
