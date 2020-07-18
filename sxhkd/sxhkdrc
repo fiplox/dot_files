@@ -1,11 +1,21 @@
 ﻿# bspwm hotkeys
 
+
 # Lock the screen
 super + shift + l
 	screenlock
 
+# Quit window
 super + q
 	bspc node -c
+
+# hide window
+super + v
+  bspc node -g hidden
+
+# unhide window
+super + shift + v
+  bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
 
 # Edit init.vim
 alt + F5
@@ -29,7 +39,8 @@ super + space
 
 # Dmenu
 alt + F1
-	dmenu_recent -fn 'Fira Code:size=16' -i
+	dmenu_run
+	#dmenu_recent -fn 'Fira Code:size=16' -i
 
 # Cleanly quit bspwm
 super + alt + {q,r}
@@ -325,17 +336,20 @@ XF86AudioMicMute
 	pactl set-source-mute 1 toggle
 	
 XF86MonBrightnessDown
- light -U 5 
+	light -U 10
+#	brightness.sh - 0.1
 
 XF86MonBrightnessUp
- light -A 5
+	light -A 10
+#	brightness.sh + 0.1
+
  
 #XF86Sleep
 #	systemctl suspend
 
 # Control mpc 
-alt + {1,2,3,4,5,6}
-	mpc {prev,toggle,stop,next,seek -1%, seek +1%}
+#alt + {1,2,3,4,5,6}
+#	mpc {prev,toggle,stop,next,seek -1%, seek +1%}
 
 # make sxhkd reload its configuration files:
 super + Escape
