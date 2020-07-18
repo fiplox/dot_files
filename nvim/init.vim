@@ -1,3 +1,8 @@
+" autocmds
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+autocmd BufWinLeave * mkview
+autocmd BufWinEnter * silent loadview 
+
 " Lightline config
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -9,6 +14,7 @@ let g:lightline = {
       \   'text': 'GET SHIT DONE!'
       \ },
       \ }
+
 " lets
 let g:rainbow_active = 1
 let mapleader=","
@@ -24,7 +30,7 @@ highlight PmenuThumb ctermbg=White
 map <Leader>tt :vnew term://fish<CR> 
 
 " nmaps
-nmap ; : 
+nmap ; :
 nmap <C-c> :ccl <bar> :lclose<CR>
 nmap <C-N><C-N> :set nu! rnu!<CR>
 
@@ -34,12 +40,23 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+nnoremap <F9> za
+
+" inoremaps
+inoremap <PageUp> <C-x><C-o>
+inoremap <F9> <C-O>za
 
 " noremaps
 noremap <silent> <C-Left> :vertical resize +3<CR>
 noremap <silent> <C-Right> :vertical resize -3<CR>
 noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :resize -3<CR>
+
+" onoremaps
+onoremap <F9> <C-C>za
+
+" vnorepams
+vnoremap <F9> zf
 
 " sets
 set autoindent
@@ -67,13 +84,12 @@ hi Folded ctermbg=Black
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""'''
-"COC CONFIG
+" COC CONFIG
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""'
 set hidden
 set nobackup
 set nowritebackup
 "set cmdheight=2
-set updatetime=300
 set shortmess+=c
 "set signcolumn=yes
 inoremap <silent><expr> <TAB>
@@ -98,7 +114,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'frazrepo/vim-rainbow'
 Plug 'preservim/nerdcommenter'
 Plug 'lilydjwg/colorizer'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
