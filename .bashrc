@@ -1,10 +1,27 @@
+# /etc/skel/.bashrc
 #
-# ~/.bashrc
-#
-#set -o vi
+# This file is sourced by all *interactive* bash shells on startup,
+# including some apparently interactive shells such as scp and rcp
+# that can't tolerate any output.  So make sure this doesn't display
+# anything or bad things will happen !
 
-[[ $- != *i* ]] && return
 
+# Test for an interactive shell.  There is no need to set anything
+# past this point for scp and rcp, and it's important to refrain from
+# outputting anything in those cases.
+if [[ $- != *i* ]] ; then
+	# Shell is non-interactive.  Be done now!
+	return
+fi
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# Put your fun stuff here.
+
+alias ls='ls --color=auto'
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec startx
+fi
 colors() {
 	local fgc bgc vals seq0
 
@@ -70,50 +87,44 @@ if ${use_color} ; then
 		fi
 	fi
 
-	if [[ ${EUID} == 0 ]] ; then
-		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
-	else
-		PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
-	fi
 
 	alias grep='grep --colour=auto'
 	alias egrep='egrep --colour=auto'
 	alias fgrep='fgrep --colour=auto'
-else
-	if [[ ${EUID} == 0 ]] ; then
-		# show root@ when we don't have colors
-		PS1='\u@\h \W \$ '
-	else
-		PS1='\u@\h \w \$ '
-	fi
 fi
 
 unset use_color safe_term match_lhs sh
 
-export EDITOR=vim
+#export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+ #export MANPAGER="nvim -c 'set ft=man' -"
 export HISTCONTROL=ignoreboth:erasedups
-alias update='sudo pacman -Syu'
-alias c='clear'
-alias search='pacman -Ss'
-alias install='sudo pacman -S'
-alias cp="cp -i"                          # confirm before overwriting something
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-alias np='nano -w PKGBUILD'
-alias more=less
-alias clean='sudo pacman -Rsn $(pacman -Qdtq)'
-alias grep='grep --color=auto'
-alias vi=vim
-alias svi='sudo vim'
-alias svim='sudo vim'
-alias mv='mv -i'
+alias cp="cp -r"              
+alias v=nvim
+alias vi=nvim
+alias vim=nvim
+alias sv=sudoedit
+#alias mv='mv -i'
 alias ln='ln -i'
-alias rm='rm -i'
-alias untar='tar -zxvf'
-alias ls='exa -l --color=always --group-directories-first' # my preferred listing
-alias la='exa -a --color=always --group-directories-first'  # all files and dirs
-alias ll='exa -al --color=always --group-directories-first'  # long format
-alias lt='exa -aT --color=always --group-directories-first' # tree listing
+alias rm='echo "Try again with rmt."; false'
+alias rmt='trash-put'
+alias ls='exa --icons -s type --color never'
+alias la='exa --icons -s type -a'
+alias ll='exa --icons -s type -l --git -g'
+alias lt='exa --icons -s type --tree'
+alias lla='exa --icons -s type -la --git -g'
+alias gotest='golangci-lint run --enable-all'
+alias gs='git status'
+alias gp='git push'
+alias gcm='git commit -m'
+alias ga='git add'
+alias gb='git branch'
+alias gd='git diff'
+alias gl='git log'
+alias p=python
+alias update='sudo emerge --sync -q && sudo emerge --update --deep -akq --newuse @world'
+alias timeupd='sudo ntpdate ntp.metas.ch'
+alias adb-restart='sudo adb kill-server && sudo adb start-server'
+alias arch-mount='sudo mount /dev/nvme0n1p2 /mnt/arch'
 
 xhost +local:root > /dev/null 2>&1
 
@@ -131,6 +142,9 @@ shopt -s expand_aliases
 
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
+shopt -s cdspell # autocorrects cd misspellings.
+#bind "set completion-ignore-case on" # ignore upper and lowercase when TAB completion.
+#bind "set show-all-if-ambiguous On"
 
 #
 # # ex - archive extractor
@@ -142,7 +156,7 @@ ex ()
       *.tar.bz2)   tar xjf $1   ;;
       *.tar.gz)    tar xzf $1   ;;
       *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1     ;;
+      *.rar)       unrar x $1   ;;
       *.gz)        gunzip $1    ;;
       *.tar)       tar xf $1    ;;
       *.tbz2)      tar xjf $1   ;;
@@ -150,57 +164,55 @@ ex ()
       *.zip)       unzip $1     ;;
       *.Z)         uncompress $1;;
       *.7z)        7z x $1      ;;
+      *.deb)       ar x $1      ;;
+      *.tar.xz)    tar xf $1    ;;
+      *.tar.zst)   unzstd $1    ;;      
       *)           echo "'$1' cannot be extracted via ex()" ;;
     esac
   else
     echo "'$1' is not a valid file"
   fi
 }
-# get current branch in git repo
-function parse_git_branch() {
-	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-	if [ ! "${BRANCH}" == "" ]
-	then
-		STAT=`parse_git_dirty`
-		echo "[${BRANCH}${STAT}]"
-	else
-		echo ""
-	fi
-}
 
-# get current status of git repo
-function parse_git_dirty {
-	status=`git status 2>&1 | tee`
-	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
-	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
-	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
-	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
-	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
-	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
-	bits=''
-	if [ "${renamed}" == "0" ]; then
-		bits=">${bits}"
-	fi
-	if [ "${ahead}" == "0" ]; then
-		bits="*${bits}"
-	fi
-	if [ "${newfile}" == "0" ]; then
-		bits="+${bits}"
-	fi
-	if [ "${untracked}" == "0" ]; then
-		bits="?${bits}"
-	fi
-	if [ "${deleted}" == "0" ]; then
-		bits="x${bits}"
-	fi
-	if [ "${dirty}" == "0" ]; then
-		bits="!${bits}"
-	fi
-	if [ ! "${bits}" == "" ]; then
-		echo " ${bits}"
-	else
-		echo ""
-	fi
+#
+# # pdf - pdf convertor
+# # usage: pdf <file>
+pdf ()
+{
+	name=$(echo $1 | cut -d\. -f1)
+	pandoc $1 -o $name.pdf
 }
+# PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\]'
+#export LS_COLORS='di=38;5;33:ln=38;5;44:so=38;5;44:pi=38;5;44:bd=38;5;44:or=38;5;124:cd=38;5;172:ex=38;5;40:fi=38;5;184:no=38;5;245'
+#PS1='\[\e[01;33m\][\[\e[01;32m\]\u@\h\[\e[01;34m\] \w \[\e[01;33m\]]\[\e[01;34m\]\$\[\e[00m\] '
+PS1='\[\e[01;36m\]\W \[\e[00m\]$ '
+#if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
+    #GIT_PROMPT_ONLY_IN_REPO=1
+    #GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
+    #GIT_PROMPT_IGNORE_SUBMODULES=1 # uncomment to avoid searching for changed files in submodules
+    #GIT_PROMPT_WITH_VIRTUAL_ENV=0 # uncomment to avoid setting virtual environment infos for node/python/conda environments
 
-export PS1="\[\e[32m\]\w\[\e[m\] \[\e[34m\]\`parse_git_branch\`\[\e[m\]\[\e[36m\]\\$\[\e[m\] "
+   ## GIT_PROMPT_SHOW_UPSTREAM=1 # uncomment to show upstream tracking branch
+   ## GIT_PROMPT_SHOW_UNTRACKED_FILES=normal # can be no, normal or all; determines counting of untracked files
+
+   ## GIT_PROMPT_SHOW_CHANGED_FILES_COUNT=0 # uncomment to avoid printing the number of changed files
+
+   ## GIT_PROMPT_STATUS_COMMAND=gitstatus_pre-1.7.10.sh # uncomment to support Git older than 1.7.10
+
+   ## GIT_PROMPT_START=...    # uncomment for custom prompt start sequence
+   ## GIT_PROMPT_END=...      # uncomment for custom prompt end sequence
+
+   ## as last entry source the gitprompt script
+   ## GIT_PROMPT_THEME=Custom # use custom theme specified in file GIT_PROMPT_THEME_FILE (default ~/.git-prompt-colors.sh)
+   ## GIT_PROMPT_THEME_FILE=~/.git-prompt-colors.sh
+    #GIT_PROMPT_THEME=Single_line_NoExitState_Gentoo # use theme optimized for solarized color scheme
+    #source $HOME/.bash-git-prompt/gitprompt.sh
+#fi
+
+bind '"\C-a":"fg\015"'
+set -o vi
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
+bind 'set mark-symlinked-directories on'
+
+complete -C /home/user/go/bin/gocomplete go
