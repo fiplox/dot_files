@@ -46,8 +46,8 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod4Mask
-#define AL Mod1Mask
+#define MODKEY Mod1Mask
+#define SUPER Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -72,7 +72,6 @@ static const char *volmute[] = { "pactl", "set-sink-mute", "@DEFAULT_SINK@", "to
 static const char *micmute[] = { "pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle", NULL };
 static const char *brightnessup[] = { "light", "-A", "2.39", NULL };
 static const char *brightnessdown[] = { "light", "-U", "2.39", NULL };
-static const char *firefox[] = { "firefox", NULL };
 
 
 static Key keys[] = {
@@ -86,16 +85,15 @@ static Key keys[] = {
 	{ 0,             				XF86XK_MonBrightnessUp, 		spawn,          {.v = brightnessup } },
 	{ 0,             				XF86XK_MonBrightnessDown, 		spawn,          {.v = brightnessdown } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ AL,             				XK_x, 	   spawn,          {.v = ffcam } },
-	{ AL,             				XK_z, 	   spawn,          {.v = record } },
+	{ MODKEY,          				XK_x, 	   spawn,          {.v = ffcam } },
+	{ MODKEY,          				XK_z, 	   spawn,          {.v = record } },
 	{ MODKEY,          				XK_p, 	   spawn,          {.v = passmenu } },
-	{ AL,             				XK_d, 	   spawn,          {.v = edt } },
+	{ SUPER,           				XK_d, 	   spawn,          {.v = edt } },
 	{ 0,             				XK_Print,  spawn,          {.v = scrot } },
-	{ MODKEY|ShiftMask,             XK_b,      spawn,     	   {.v = firefox } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_Right,  focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_Left,   focusstack,     {.i = -1 } },
+	//{ MODKEY,                       XK_Right,  focusstack,     {.i = +1 } },
+	//{ MODKEY,                       XK_Left,   focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_minus,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_equal,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
