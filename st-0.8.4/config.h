@@ -103,8 +103,8 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
-/* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
+/* Terminal colors (16 first used in escape sequence) */
 	"#2e3436",
 	"#cc0000",
 	"#4e9e06",
@@ -127,7 +127,7 @@ static const char *colorname[] = {
 
 	"#cccccc",
 	"#555555",
-	"#0b090a",
+	"#181818",
 	"#dedede",
 };
 
