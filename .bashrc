@@ -50,6 +50,7 @@ colors() {
 }
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+[ -r /home/user/.config/bash_completion ] && . /home/user/.config/bash_completion
 
 # Change the window title of X terminals
 case ${TERM} in
@@ -97,17 +98,21 @@ unset use_color safe_term match_lhs sh
 
 #export MANPAGER="sh -c 'col -bx | bat -l man -p'"
  #export MANPAGER="nvim -c 'set ft=man' -"
+export HISTSIZE=20000
+export HISTFILESIZE=20000
 export HISTCONTROL=ignoreboth:erasedups
+
+alias clean='sudo pacman -Rsn $(pacman -Qdtq)'
 alias cp="cp -r"              
 alias v=nvim
 alias vi=nvim
 alias vim=nvim
 alias sv=sudoedit
-#alias mv='mv -i'
+alias mv='mv -i'
 alias ln='ln -i'
-alias rm='echo "Try again with rmt."; false'
+alias cp='cp -r'
 alias rmt='trash-put'
-alias ls='exa --icons -s type --color never'
+alias ls='exa --icons -s type --color auto'
 alias la='exa --icons -s type -a'
 alias ll='exa --icons -s type -l --git -g'
 alias lt='exa --icons -s type --tree'
@@ -121,14 +126,14 @@ alias gb='git branch'
 alias gd='git diff'
 alias gl='git log'
 alias p=python
-alias update='sudo emerge --sync -q && sudo emerge --update --deep -akq --newuse @world'
-alias timeupd='sudo ntpdate ntp.metas.ch'
+alias py=python
+#alias update='sudo emerge --sync -q && sudo emerge --update --deep -akq --newuse @world'
+alias timeupd='sudo ntpdate fr.pool.ntp.org'
 alias adb-restart='sudo adb kill-server && sudo adb start-server'
-alias arch-mount='sudo mount /dev/nvme0n1p2 /mnt/arch'
 
 xhost +local:root > /dev/null 2>&1
 
-complete -cf sudo
+#complete -cf sudo
 
 # Bash won't get SIGWINCH if another process is in the foreground.
 # Enable checkwinsize so that bash will check the terminal size when
@@ -216,3 +221,4 @@ bind -m vi-insert 'Control-l: clear-screen'
 bind 'set mark-symlinked-directories on'
 
 complete -C /home/user/go/bin/gocomplete go
+source "$HOME/.cargo/env"
