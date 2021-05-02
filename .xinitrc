@@ -54,13 +54,11 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-#sxhkd &
-#exec bspwm
 xset r rate 250 30
-setxkbmap -option grp:alt_shift_toggle us,ua
+setxkbmap -option grp:shift_caps_toggle us,ua
 setxkbmap -option caps:swapescape
-setxkbmap -option compose:rctrl
-xsetroot -cursor_name left_ptr
-~/.fehbg
+#setxkbmap -option compose:rctrl
+setxkbmap -option compose:sclk #fn + k
+~/.fehbg &
 slstatus &
 exec dwm
