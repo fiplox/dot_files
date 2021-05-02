@@ -127,6 +127,7 @@ alias gd='git diff'
 alias gl='git log'
 alias p=python
 alias py=python
+alias pman='sudo pacman'
 #alias update='sudo emerge --sync -q && sudo emerge --update --deep -akq --newuse @world'
 alias timeupd='sudo ntpdate fr.pool.ntp.org'
 alias adb-restart='sudo adb kill-server && sudo adb start-server'
@@ -190,7 +191,7 @@ pdf ()
 # PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\]'
 #export LS_COLORS='di=38;5;33:ln=38;5;44:so=38;5;44:pi=38;5;44:bd=38;5;44:or=38;5;124:cd=38;5;172:ex=38;5;40:fi=38;5;184:no=38;5;245'
 #PS1='\[\e[01;33m\][\[\e[01;32m\]\u@\h\[\e[01;34m\] \w \[\e[01;33m\]]\[\e[01;34m\]\$\[\e[00m\] '
-PS1='\[\e[01;36m\]\W \[\e[00m\]$ '
+PS1='\[\e[01;96m\]\W \[\e[00m\]$ '
 #if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
     #GIT_PROMPT_ONLY_IN_REPO=1
     #GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
