@@ -223,3 +223,4 @@ bind 'set mark-symlinked-directories on'
 
 complete -C /home/user/go/bin/gocomplete go
 source "$HOME/.cargo/env"
+. ~/.complete_alias
