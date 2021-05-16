@@ -61,4 +61,5 @@ setxkbmap -option caps:swapescape
 setxkbmap -option compose:sclk #fn + k
 ~/.fehbg &
 slstatus &
+picom --experimental-backends &
 exec dwm
