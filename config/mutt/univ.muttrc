@@ -1,0 +1,20 @@
+# vim: filetype=neomuttrc
+set imap_user = "vpatuta"
+set folder = "imaps://vpatuta@etud.univ-paris8.fr@imap.etud.univ-paris8.fr:993"
+set imap_pass = $my_pass_u
+set spoolfile = "+Inbox"
+set record = "+Sent"
+set trash = "+Trash"
+set postponed = "+Drafts"
+set ssl_force_tls = yes
+
+set realname = "Volodymyr Patuta"
+
+set my_user = "vpatuta"
+set from = "vpatuta@univ-paris8.fr"
+set smtp_pass = $imap_pass
+set use_from = yes
+set smtp_url = "smtp://vpatuta@univ-paris8.fr@smtp.univ-paris8.fr:587"
+set ssl_starttls = yes
+
+mailboxes =Inbox =Sent =Trash =Drafts =Junk
