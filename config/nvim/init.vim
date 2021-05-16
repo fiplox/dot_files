@@ -1,5 +1,5 @@
 " autocmds
-colorscheme dd
+colorscheme d
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
@@ -15,16 +15,7 @@ autocmd FileType markdown nnoremap <A-u> <Esc>I+<Space><Esc>A
 autocmd FileType markdown inoremap <A-o> <Esc>I1.<Space><Esc>A
 autocmd FileType markdown nnoremap <A-o> <Esc>I1.<Space><Esc>A
 autocmd FileType markdown nnoremap <Leader>e I<center><Esc>A</center>
-
-"autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-augroup AutoSaveFolds
-	autocmd!
-	" view files are about 500 bytes
-	" bufleave but not bufwinleave captures closing 2nd tab
-	" nested is needed by bufwrite* (if triggered via other autocmd)
-	autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview!
-	autocmd BufWinEnter ?* silent! loadview
-augroup end
+autocmd BufWritePre *.rs :call CocAction('format')
 
 function! s:init_fern() abort
 	nmap <buffer> H <Plug>(fern-action-open:split)
@@ -134,6 +125,7 @@ nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
 " nmaps
+nmap Q gq
 nmap <C-p> <Plug>MarkdownPreviewToggle
 nmap cl :ClangFormat<CR>
 nmap ; :
@@ -161,7 +153,7 @@ nnoremap <F9> za
 nnoremap <F10> zd
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 nnoremap ff gg=G
-nnoremap <C-s> :%s///gI<Left><Left><Left><Left>
+nnoremap <C-s> :s///gI<Left><Left><Left><Left><Left><Left>
 
 xnoremap <leader>p "_dP
 
@@ -207,6 +199,7 @@ set viewoptions=folds,cursor
 set sessionoptions=folds
 set completeopt-=preview
 set pumheight=5
+set nu
 
 syntax on
 filetype plugin on
@@ -239,7 +232,7 @@ endfunction
 inoremap <silent><expr> <A-space> coc#refresh()
 
 let g:coc_start_at_startup=0
-au FileType rust,python,cpp,c,html,htmldjango call COC()
+au FileType rust,python,cpp,c,html,htmldjango,go call COC()
 au FileType html,htmldjango call coc#config('suggest.autoTrigger', v:true)
 
 function COC()
@@ -253,7 +246,20 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""'
 nmap <A-s> <Plug>NERDCommenterToggle
 vmap <A-s> <Plug>NERDCommenterToggle
-imap <A-s> <Plug>NERDCommenterToggle
+imap <A-s> <ESC><Plug>NERDCommenterToggle
+
+nmap <F6> :call Toggle_color()<CR>
+let s:l=0
+function Toggle_color()
+	if s:l
+		:colorscheme d
+		let s:l=0
+	else
+		:colorscheme l
+		let s:l=1
+	endif
+endfunction
+
 
 " vim-plug 
 call plug#begin()
@@ -268,13 +274,8 @@ Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'lambdalisue/glyph-palette.vim'
-Plug 'alx741/vim-rustfmt'
 Plug 'rhysd/vim-clang-format'
 Plug 'tikhomirov/vim-glsl'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'gko/vim-coloresque'
-Plug 'mattn/emmet-vim'
-Plug 'tweekmonster/django-plus.vim'
-"Plug 'hail2u/vim-css3-syntax'
 
 call plug#end()
