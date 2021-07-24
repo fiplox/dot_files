@@ -155,7 +155,7 @@ static const char *altcolorname[] = {
 
 	"#cccccc",
 	"#ffffff",
-	"#ffffff",
+	"#F5F3EA",
 	"#0b090a",
 };
  

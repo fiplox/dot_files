@@ -66,9 +66,9 @@ static const char unknown_str[] = "n/a";
 static const struct arg args[] = {
 	/* function format          argument */
 	{ run_command, 	" 墳 %s% | ",       "amixer sget Master | awk 'FNR == 6 {gsub(/\\[|\\]|\\%/, \"\"); print $5}' 2> /dev/null" },
-	{ wifi_perc, 	" %s% | ",       "wlp2s0" },
+	{ wifi_perc, 	"﬉ %s% | ",       "wlp2s0" },
 	{ battery_perc, "  %s% | ", 		"BAT0" 	},
 	{ battery_perc, "  %s% | ", 		"BAT1" 	},
-	{ run_command, 	"%s | ", 			"/home/user/.config/polybar/ffmpeg.sh" },
-	{ datetime, 	"%s ",	        "%d/%m | %H:%M" },
+	//{ run_command, 	"%s | ", 			"/home/user/.config/polybar/ffmpeg.sh" },
+	{ datetime, 	"%s ",	        " %d/%m |  %H:%M" },
 };
