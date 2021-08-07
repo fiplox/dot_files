@@ -2,7 +2,7 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -72,6 +72,7 @@ static const char *passmenu[] = { "passmenu", "-m", dmenumon, "-fn", dmenufont, 
 //static const char *record[] = { "/home/user/bin/record.sh", NULL };
 //static const char *ffcam[] = { "/home/user/bin/dummycam.sh", NULL };
 static const char *scrot[] = { "dmenu_scrot", NULL };
+static const char *notes[] = { "dmenu_notes", NULL };
 static const char *volup[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
 static const char *voldown[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
 static const char *volmute[] = { "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
@@ -83,6 +84,7 @@ static const char *brightnessdown[] = { "light", "-U", "2.39", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_n,      spawn,          {.v = notes } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ 0,                       		XF86XK_AudioRaiseVolume,  	    spawn,          {.v = volup } },
 	{ 0,                       		XF86XK_AudioLowerVolume,    	spawn,          {.v = voldown } },
