@@ -31,7 +31,9 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'honza/vim-snippets'
 
-Plug 'airblade/vim-rooter'
+" Plug 'airblade/vim-rooter'
+
+Plug 'akinsho/nvim-toggleterm.lua'
 
 call plug#end()
 
@@ -43,3 +45,4 @@ source $XDG_CONFIG_HOME/nvim/maps.vim
 source $XDG_CONFIG_HOME/nvim/settings.vim
 source $XDG_CONFIG_HOME/nvim/treesitter.vim
 source $XDG_CONFIG_HOME/nvim/whichkey.vim
+source $XDG_CONFIG_HOME/nvim/toggleterm.vim
