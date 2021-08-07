@@ -1,4 +1,4 @@
-set guicursor=n-v-c-sm:hor20,i-ci-ve:ver20,r-cr-o:Block " treat dash separated words as a word text object"
+set guicursor=n-v-c-sm:hor20,i-ci-ve:ver20,r-cr-o:Block
 
 set mouse=vn " Enable your mouse
 set path=.,,**h
@@ -7,7 +7,7 @@ set fileencoding=utf-8 " The encoding written to file
 "set cmdheight = 2 " More space for displaying messages
 set splitbelow " Horizontal splits will automatically be below
 set splitright " Vertical splits will automatically be to the right
-set ts=4 " Insert 2 spaces for a tab (tabstop)
+set ts=4 " Insert 4 spaces for a tab (tabstop)
 set sw=4 " Change the number of space characters inserted for indentation (shiftwidth)
 set smartindent " Makes indenting smart
 "set expandtab " Converts tabs to spaces
@@ -82,6 +82,7 @@ let g:clang_format#style_options = {
 			\ "FixNamespaceComments" : "true",
 			\ "PointerAlignment" : "Right",
 			\ "ColumnLimit" : "120",
+			\ "ContinuationIndentWidth" : "2",
 			\ "UseTab" : "Always"}
 
 "source `dirname $MYVIMRC`/fzf.vim
