@@ -36,10 +36,11 @@ hi goFunctionCall ctermfg=80
 " hi cType ctermfg=221
 " hi cInclude ctermfg=98
 " hi rustQuestionMark ctermfg=173
-hi Type ctermfg=221
+hi Type ctermfg=208
 hi Constant ctermfg=98
-hi Identifier ctermfg=80
-hi Statement ctermfg=39
+hi Identifier ctermfg=74
+hi Statement ctermfg=33
+hi PreProc ctermfg=37
 
 hi Special	ctermfg=darkmagenta
 
