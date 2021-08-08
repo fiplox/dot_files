@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMG_PATH=/home/user/Pictures/screenshts/ # Path where to save screenshots.
+IMG_PATH=/home/user/Pictures/screenshots/ # Path where to save screenshots.
 EDIT=gimp # Image editor.
 TIME=3 # Seconds notification should remain visible.
 
