@@ -1,6 +1,0 @@
-#!/bin/bash
-
-coproc bluetoothctl
-echo -e 'power on\nconnect 00:42:79:89:DA:78\nexit' >&${COPROC[1]}
-output=$(cat <&${COPROC[0]})
-echo $output

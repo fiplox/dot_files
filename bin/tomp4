@@ -1,4 +1,0 @@
-#!/bin/sh
-file=$1
-name=$(echo "$file" | cut -f 1 -d '.')
-ffmpeg -i $file -pix_fmt yuv420p $name.mp4 && trash-put $file

@@ -1,6 +1,0 @@
-coc-snippets
-coc-rust-analyzer
-coc-pyright
-coc-go
-coc-flutter
-coc-clangd

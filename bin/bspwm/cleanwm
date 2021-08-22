@@ -1,3 +1,0 @@
-#!/bin/sh
-
-sudo killall upowerd obexd dconf-service colord xconfd xdg-permission-store xdg-document-portal systemd-udevd pipewire tumlerd xdg-desktop-portal gnome-keyring-daemon pipewire-media-session

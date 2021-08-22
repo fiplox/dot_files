@@ -1,7 +1,0 @@
-[init]
-	defaultBranch = main
-[core]
-	excludesfile = /home/user/.gitignore_global
-[user]
-	name = fiplox
-	email = 56274824+fiplox@users.noreply.github.com
