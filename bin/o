@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nvim -p src/main.rs src/rnote/*

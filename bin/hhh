@@ -1,0 +1,6 @@
+#!/bin/sh
+xrandr --output eDP --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-A-0 --mode 1920x1080 --rate 74.97 --pos 1920x0 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off
+#bspc wm -r
+echo 0 > /home/user/.config/sxhkd/vvv
+#feh --no-fehbg --bg-scale ~/Pictures/1.jpg --bg-scale ~/Pictures/2.jpg
+feh --no-fehbg --bg-scale ~/.wallpaper.jpg --bg-scale ~/Pictures/h1.jpg

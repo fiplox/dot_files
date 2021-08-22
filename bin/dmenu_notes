@@ -1,0 +1,36 @@
+#!/bin/bash
+
+NOTE_PATH=$HOME/notes
+EDITOR=nvim
+
+notes=$(/bin/ls -t $HOME/notes)
+notes="Today
+$notes"
+
+cmd=$(dmenu -l 100 -fn 'monospace:size=10' -p 'Note'   <<< "$notes")
+case ${cmd%% *} in
+	Today) 
+		filename="$NOTE_PATH/note-$(date +%Y-%m-%d).md"
+		if [ ! -f $filename ]; then
+			st -e nvim -c "norm i# $(date +%Y-%m-%d)" \
+				-c "norm Go## $(date +%H:%M)" \
+				-c "norm G2o" \
+				-c "norm zz" \
+				-c "startinsert" "$filename"
+		else
+			st -e nvim -c "norm Go" \
+				-c "norm Go## $(date +%H:%M)" \
+				-c "norm G2o" \
+				-c "norm zz" \
+				-c "startinsert" "$filename"
+		fi;;
+		*)
+		if [ ! -f "$NOTE_PATH/${cmd%%}" ]; then
+			exit
+		fi
+			st -e nvim -c "norm Go" \
+		-c "norm Go## $(date +%H:%M)" \
+		-c "norm G2o" \
+		-c "norm zz" \
+		-c "startinsert" "$NOTE_PATH/${cmd%%}";;
+esac

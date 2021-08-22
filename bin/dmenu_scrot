@@ -1,0 +1,27 @@
+#!/bin/bash
+
+IMG_PATH=/home/user/Pictures/screenshots/ # Path where to save screenshots.
+EDIT=gimp # Image editor.
+TIME=3 # Seconds notification should remain visible.
+
+
+prog="1.qselect
+2.qfullscreen
+3.section
+4.focused
+5.fullscreen
+6.edit_fullscreen"
+
+cmd=$(dmenu -fn 'monospace:size=10' -p 'Screenshot Type'   <<< "$prog")
+
+cd $IMG_PATH
+case ${cmd%% *} in
+# Uncomment commented lines to receive notofications.
+	1.qselect)	scrot -s '%Y-%m-%d-@%H-%M-%S-scrot.png' -e 'xclip -selection clipboard -target image/png -i $f && trash-put $f';; # && notify-send -u low -t $TIME 'Scrot' 'Selection taken'    ;;
+	2.qfullscreen)	scrot -d 1 '%Y-%m-%d-@%H-%M-%S-scrot.png' -e 'xclip -selection clipboard -target image/png -i $f && trash-put $f';; # && notify-send -u low -t $TIME 'Scrot' 'Fullscreen taken'  ;;
+	3.section)	scrot -s '%Y-%m-%d-@%H-%M-%S-scrot.png' -e 'xclip -selection clipboard -target image/png -i $f';; # && notify-send -u low -t $TIME 'Scrot' 'Selection taken and saved'  ;;
+	4.focused)	scrot -u  '%Y-%m-%d-@%H-%M-%S-scrot.png' -e 'xclip -selection clipboard -target image/png -i $f';; # && notify-send -u low -t $TIME 'Scrot' 'Selection taken and saved'  ;;
+	5.fullscreen)	scrot '%Y-%m-%d-@%H-%M-%S-scrot.png' -e 'xclip -selection clipboard -target image/png -i $f';; # && notify-send -u low -t $TIME 'Scrot' 'Fullscreen taken and saved' ;;
+	6.edit_fullscreen)	scrot '%Y-%m-%d-@%H-%M-%S-scrot.png' -e "$EDIT \$f";; # && notify-send -u low -t $TIME 'Scrot' 'Screenshot edited and saved' ;;
+  	*)		echo "NOPE"  ;;
+esac

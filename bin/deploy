@@ -1,0 +1,9 @@
+#!/bin/sh
+USER=user
+HOST=vpatuta.xyz
+DIR=/var/www/vpatuta/   # the directory where your web site files should go
+
+cd /home/user/dev/vpatuta.xyz
+hugo && rsync -avz --delete /home/user/dev/vpatuta.xyz/public/ ${USER}@${HOST}:${DIR}
+
+exit 0
