@@ -1,0 +1,15 @@
+{
+	"suggest.autoTrigger": "none",
+	"languageserver": {
+		"racket": {
+			"command": "racket",
+			"args": [
+				"--lib",
+				"racket-langserver"
+			],
+			"filetypes": [
+				"scheme"
+			]
+		}
+	}
+}
