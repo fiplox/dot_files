@@ -1,0 +1,44 @@
+# bash completion for figlet/toilet
+
+#{
+    #have figlet || have toilet
+#} &&
+_figlet_toilet()
+{
+    local prev cur opts pat
+    _get_comp_words_by_ref cur prev
+    opts="-f"
+
+    COMPREPLY=()
+
+    case $prev in
+        -f)
+            case "${1}" in
+                figlet)
+                    pat='flf'
+                ;;
+                toilet)
+                    pat='[tf]lf'
+                ;;
+            esac
+            local running=$(find /usr/share/figlet -name "*.${pat}" -printf '%P\n' | sed "s/\.${pat}\$//")
+            COMPREPLY=( $(compgen -W "${running}" -- ${cur}) )
+            return 0
+            ;;
+        *)
+            ;;
+    esac
+
+    # if '-f' is already given, then generate random string
+    for (( i=0; i < ${#COMP_WORDS[@]}-1; i++ )); do
+        if [[ ${COMP_WORDS[i]} == -f ]]; then
+            # COMPREPLY=("'$(fortune -sn42)'")
+            return 0
+        fi
+    done
+
+    COMPREPLY=( $( compgen -W "$opts" -- "$cur" ) )
+
+    return 0
+} &&
+complete -F _figlet_toilet figlet toilet
