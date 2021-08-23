@@ -12,7 +12,7 @@ prog="1.qselect
 5.fullscreen
 6.edit_fullscreen"
 
-cmd=$(dmenu -fn 'monospace:size=10' -p 'Screenshot Type'   <<< "$prog")
+cmd=$(dmenu -fn 'JetBrains Mono:size=10' -nb "#222222" -nf "#bbbbbb" -sb "#005fff" -sf "#eeeeee" -p 'Screenshot Type'   <<< "$prog")
 
 cd $IMG_PATH
 case ${cmd%% *} in

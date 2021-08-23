@@ -7,7 +7,7 @@ notes=$(/bin/ls -t $HOME/notes)
 notes="Today
 $notes"
 
-cmd=$(dmenu -l 100 -fn 'monospace:size=10' -p 'Note'   <<< "$notes")
+cmd=$(dmenu -l 100 -fn 'JetBrains Mono:size=10' -nb "#222222" -nf "#bbbbbb" -sb "#005fff" -sf "#eeeeee" -p 'Note'   <<< "$notes")
 case ${cmd%% *} in
 	Today) 
 		filename="$NOTE_PATH/note-$(date +%Y-%m-%d).md"
