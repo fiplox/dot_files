@@ -98,12 +98,12 @@ export HISTSIZE=20000
 export HISTFILESIZE=20000
 export HISTCONTROL=ignoreboth:erasedups
 
-alias clean='sudo pacman -Rsn $(pacman -Qdtq)'
+alias clean='doas pacman -Rsn $(pacman -Qdtq)'
 alias cp="cp -r"              
 alias v=nvim
 alias vi=nvim
 alias vim=nvim
-alias sv=sudoedit
+alias sv='doas nvim'
 alias mv='mv -i'
 alias ln='ln -i'
 alias cp='cp -r'
@@ -125,15 +125,18 @@ alias p=python
 alias py=python
 alias mutt='neomutt -n'
 #alias update='sudo emerge --sync -q && sudo emerge --update --deep -akq --newuse @world'
-alias timeupd='sudo ntpdate fr.pool.ntp.org'
-alias adb-restart='sudo adb kill-server && sudo adb start-server'
-alias rsync='rsync -rh --info=progress2'
-alias s='sudo systemctl'
+alias timeupd='doas ntpdate fr.pool.ntp.org'
+alias adb-restart='doas adb kill-server && doas adb start-server'
+alias rsync='rsync -rha --info=progress2'
+alias s='doas systemctl'
 # alias t=task
 # alias d=startx
 # alias x='startx ~/.xinitrc xfce'
 alias lsblk='lsblk --output NAME,SIZE,RO,MOUNTPOINT,UUID'
 alias chat=profanity
+alias gpg-restart='gpg-connect-agent reloadagent /bye'
+alias listen-mic='pactl load-module module-loopback latency_msec=1'
+alias unlisten-mic='pactl unload-module module-loopback'
 
 xhost +local:root > /dev/null 2>&1
 
@@ -199,6 +202,7 @@ bind -m vi-insert 'Control-l: clear-screen'
 bind 'set mark-symlinked-directories on'
 
 #complete -C /home/user/go/bin/gocomplete go
+complete -cf doas
 source ~/.complete_alias
 source /usr/share/fzf/key-bindings.bash
 #source /usr/share/doc/fzf/examples/completion.bash
@@ -209,4 +213,3 @@ eval "$(pandoc --bash-completion)"
 if [ -f ~/.config/exercism/exercism_completion.bash ]; then
   source ~/.config/exercism/exercism_completion.bash
 fi
-. "$HOME/.cargo/env"

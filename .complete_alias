@@ -460,7 +460,7 @@ _set_default_completion() {
             tsocks|vsound|xargs)
             complete -F _command "$cmd"
             ;;
-        fakeroot|gksu|gksudo|kdesudo|really)
+		fakeroot|gksu|gksudo|kdesudo|really)
             complete -F _root_command "$cmd"
             ;;
         a2ps|awk|base64|bash|bc|bison|cat|chroot|colordiff|cp|csplit|cut|date|\
