@@ -3,4 +3,4 @@ xrandr --output eDP --primary --mode 1920x1080 --pos 0x0 --rotate normal --outpu
 #bspc wm -r
 echo 0 > /home/user/.config/sxhkd/vvv
 #feh --no-fehbg --bg-scale ~/Pictures/1.jpg --bg-scale ~/Pictures/2.jpg
-feh --no-fehbg --bg-scale ~/.wallpaper.jpg --bg-scale ~/Pictures/h1.jpg
+feh --no-fehbg --bg-scale ~/.wallpaper.jpg
