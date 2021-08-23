@@ -74,7 +74,7 @@ static const char *passmenu[] = { "passmenu", "-m", dmenumon, "-fn", dmenufont, 
 //static const char *record[] = { "/home/user/bin/record.sh", NULL };
 //static const char *ffcam[] = { "/home/user/bin/dummycam.sh", NULL };
 static const char *scrot[] = { "dmenu_scrot", NULL };
-static const char *notes[] = { "dmenu_notes", NULL };
+static const char *media_controls[] = { "dmenu_media", NULL };
 static const char *volup[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
 static const char *voldown[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
 static const char *volmute[] = { "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
@@ -86,7 +86,7 @@ static const char *brightnessdown[] = { "light", "-U", "2.39", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_n,      spawn,          {.v = notes } },
+	{ MODKEY,                       XK_a,      spawn,          {.v = media_controls } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ 0,                       		XF86XK_AudioRaiseVolume,  	    spawn,          {.v = volup } },
 	{ 0,                       		XF86XK_AudioLowerVolume,    	spawn,          {.v = voldown } },
