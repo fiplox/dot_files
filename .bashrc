@@ -98,12 +98,12 @@ export HISTSIZE=20000
 export HISTFILESIZE=20000
 export HISTCONTROL=ignoreboth:erasedups
 
-alias clean='doas pacman -Rsn $(pacman -Qdtq)'
+alias clean='sudo pacman -Rsn $(pacman -Qdtq)'
 alias cp="cp -r"              
 alias v=nvim
 alias vi=nvim
 alias vim=nvim
-alias sv='doas nvim'
+alias sv='sudoedit'
 alias mv='mv -i'
 alias ln='ln -i'
 alias cp='cp -r'
@@ -125,10 +125,10 @@ alias p=python
 alias py=python
 alias mutt='neomutt -n'
 #alias update='sudo emerge --sync -q && sudo emerge --update --deep -akq --newuse @world'
-alias timeupd='doas ntpdate fr.pool.ntp.org'
-alias adb-restart='doas adb kill-server && doas adb start-server'
+alias timeupd='sudo ntpdate fr.pool.ntp.org'
+alias adb-restart='sudo adb kill-server && sudo adb start-server'
 alias rsync='rsync -rha --info=progress2'
-alias s='doas systemctl'
+alias s='sudo systemctl'
 # alias t=task
 # alias d=startx
 # alias x='startx ~/.xinitrc xfce'
@@ -202,7 +202,6 @@ bind -m vi-insert 'Control-l: clear-screen'
 bind 'set mark-symlinked-directories on'
 
 #complete -C /home/user/go/bin/gocomplete go
-complete -cf doas
 source ~/.complete_alias
 source /usr/share/fzf/key-bindings.bash
 #source /usr/share/doc/fzf/examples/completion.bash
