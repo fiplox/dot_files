@@ -72,3 +72,4 @@ hi NormalFloat ctermbg=233
 hi Comment ctermfg=darkgrey
 
 hi Constant ctermfg=grey
+hi SignColumn ctermbg=NONE
