@@ -141,7 +141,8 @@ alias chat=profanity
 alias gpg-restart='gpg-connect-agent reloadagent /bye'
 alias listen-mic='pactl load-module module-loopback latency_msec=1'
 alias unlisten-mic='pactl unload-module module-loopback'
-
+alias asdf="setxkbmap us -variant colemak"
+alias arst="setxkbmap us"
 xhost +local:root > /dev/null 2>&1
 
 # Bash won't get SIGWINCH if another process is in the foreground.
