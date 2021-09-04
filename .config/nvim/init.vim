@@ -1,6 +1,6 @@
 let mapleader="\<Space>"
 
-colorscheme new
+colorscheme bw
 
 source $XDG_CONFIG_HOME/nvim/fzf.vim
 
@@ -25,7 +25,7 @@ Plug 'guns/xterm-color-table.vim'
 
 Plug 'folke/which-key.nvim'
 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'honza/vim-snippets'
 
@@ -45,6 +45,6 @@ EOF
 
 source $XDG_CONFIG_HOME/nvim/maps.vim
 source $XDG_CONFIG_HOME/nvim/settings.vim
-source $XDG_CONFIG_HOME/nvim/treesitter.vim
+" source $XDG_CONFIG_HOME/nvim/treesitter.vim
 source $XDG_CONFIG_HOME/nvim/whichkey.vim
 source $XDG_CONFIG_HOME/nvim/toggleterm.vim
