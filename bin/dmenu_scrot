@@ -17,9 +17,9 @@ cmd=$(dmenu -fn 'JetBrains Mono:size=10' -nb "#222222" -nf "#bbbbbb" -sb "#005ff
 cd $IMG_PATH
 case ${cmd%% *} in
 # Uncomment commented lines to receive notofications.
-	1.qselect)	scrot -s '%Y-%m-%d-@%H-%M-%S-scrot.png' -e 'xclip -selection clipboard -target image/png -i $f && trash-put $f';; # && notify-send -u low -t $TIME 'Scrot' 'Selection taken'    ;;
+	1.qselect)	scrot -sf '%Y-%m-%d-@%H-%M-%S-scrot.png' -e 'xclip -selection clipboard -target image/png -i $f && trash-put $f';; # && notify-send -u low -t $TIME 'Scrot' 'Selection taken'    ;;
 	2.qfullscreen)	scrot -d 1 '%Y-%m-%d-@%H-%M-%S-scrot.png' -e 'xclip -selection clipboard -target image/png -i $f && trash-put $f';; # && notify-send -u low -t $TIME 'Scrot' 'Fullscreen taken'  ;;
-	3.section)	scrot -s '%Y-%m-%d-@%H-%M-%S-scrot.png' -e 'xclip -selection clipboard -target image/png -i $f';; # && notify-send -u low -t $TIME 'Scrot' 'Selection taken and saved'  ;;
+	3.section)	scrot -sf '%Y-%m-%d-@%H-%M-%S-scrot.png' -e 'xclip -selection clipboard -target image/png -i $f';; # && notify-send -u low -t $TIME 'Scrot' 'Selection taken and saved'  ;;
 	4.focused)	scrot -u  '%Y-%m-%d-@%H-%M-%S-scrot.png' -e 'xclip -selection clipboard -target image/png -i $f';; # && notify-send -u low -t $TIME 'Scrot' 'Selection taken and saved'  ;;
 	5.fullscreen)	scrot '%Y-%m-%d-@%H-%M-%S-scrot.png' -e 'xclip -selection clipboard -target image/png -i $f';; # && notify-send -u low -t $TIME 'Scrot' 'Fullscreen taken and saved' ;;
 	6.edit_fullscreen)	scrot '%Y-%m-%d-@%H-%M-%S-scrot.png' -e "$EDIT \$f";; # && notify-send -u low -t $TIME 'Scrot' 'Screenshot edited and saved' ;;
