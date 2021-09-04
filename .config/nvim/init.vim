@@ -12,10 +12,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jiangmiao/auto-pairs' " Alt + p  to toggle
 Plug 'rhysd/vim-clang-format'
 Plug 'tikhomirov/vim-glsl'
-Plug 'dhruvasagar/vim-table-mode'
+" Plug 'dhruvasagar/vim-table-mode'
 
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'thosakwe/vim-flutter'
+" Plug 'dart-lang/dart-vim-plugin'
+" Plug 'thosakwe/vim-flutter'
 
 Plug 'conweller/findr.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
