@@ -1,17 +1,21 @@
 #!/bin/bash
 
-prog="1.play/pause
-2.next
-3.previous"
+prog="1.Play/Pause
+2.Next
+3.Previous
+4.+30sec
+5.-30sec"
 
 cmd=$(dmenu -fn 'JetBrains Mono:size=10' -nb "#222222" -nf "#bbbbbb" -sb "#005fff" -sf "#eeeeee" -p 'Media'   <<< "$prog")
 
 cd $IMG_PATH
 case ${cmd%% *} in
 # Uncomment commented lines to receive notofications.
-	1.play/pause) playerctl play-pause;;
-	2.next)	playerctl next;;
-	3.previous)	playerctl previous;;
+	1.Play/Pause) playerctl play-pause -a ;;
+	2.Next)	playerctl next ;;
+	3.Previous)	playerctl previous ;;
+	4.+30sec) playerctl position 30+ ;;
+	5.-30sec) playerctl position 30- ;;
   	*) echo "NOPE"  ;;
 esac
 
